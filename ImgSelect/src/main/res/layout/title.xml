@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/title_bg"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/size_50"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/left_icon"
+        android:layout_marginLeft="@dimen/size_10"
+        android:layout_centerVertical="true"
+        android:src="@drawable/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:clickable="true"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textSize="@dimen/large_size" />
+
+    <TextView
+        android:id="@+id/right"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/size_30"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/size_15"
+        android:gravity="center_vertical"
+        android:textColor="@color/black"
+        android:textSize="@dimen/middle_size"/>
+    <ImageView
+        android:id="@+id/right_icon"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/size_6"
+        android:src="@drawable/circle_01"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/div"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_1"
+        android:layout_alignParentBottom="true"
+        android:src="@color/border" />
+</RelativeLayout>

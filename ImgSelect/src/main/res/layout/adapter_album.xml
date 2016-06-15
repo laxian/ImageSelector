@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+    <ImageView
+        android:id="@+id/iv_cover"
+        android:layout_margin="@dimen/size_10"
+        android:layout_width="57dp"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/test_avatar"
+        android:layout_height="57dp" />
+    <TextView
+        android:id="@+id/tv_album_name"
+        tools:text="所有照片"
+        android:layout_toRightOf="@id/iv_cover"
+        android:layout_centerVertical="true"
+        android:textSize="@dimen/middle_size"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tv_photo_num"
+        tools:text="(1)"
+        android:visibility="gone"
+        android:layout_toRightOf="@id/tv_album_name"
+        android:layout_alignBaseline="@id/tv_album_name"
+        android:layout_marginLeft="@dimen/size_5"
+        android:layout_centerVertical="true"
+        android:textSize="@dimen/middle_size"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/size_10"
+        android:src="@drawable/nav_forward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_alignParentBottom="true"
+        android:background="@color/divider_gray"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_05"/>
+</RelativeLayout>

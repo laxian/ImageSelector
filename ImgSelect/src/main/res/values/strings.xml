@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">ImageSelector</string>
+    <string name="cancel">取消</string>
+    <string name="album">相簿</string>
+    <string name="preview">预览</string>
+    <string name="done">确定</string>
+    <string name="image_over_limit">图片数量超出限制!</string>
+    <string name="remove">移除</string>
+    <string name="remove_this_image">要移除这张照片吗？</string>
+    <string name="choose_album">选择相册</string>
+    <string name="all_photo">全部照片</string>
+    <string name="image_out_of_range">图片数量超出限制!</string>
+    <string name="done_count">确定(%d)</string>
+    <string name="done_99">确定(99+)</string>
+    <string name="you_not_select_image">您还没有选择图片</string>
+</resources>

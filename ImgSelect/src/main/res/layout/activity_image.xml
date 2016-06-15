@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include android:id="@+id/image_title" layout="@layout/title"/>
+    <RelativeLayout
+        android:id="@+id/bottom_layout"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:background="@color/black"
+        android:layout_height="@dimen/size_50">
+        <TextView
+            android:id="@+id/tv_preview"
+            android:textSize="@dimen/small_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/preview"
+            android:textColor="@color/white"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/size_10"
+            />
+        <TextView
+            android:id="@+id/tv_done"
+            android:textSize="@dimen/small_size"
+            android:gravity="center"
+            android:layout_width="@dimen/size_65"
+            android:layout_height="@dimen/size_30"
+            android:text="@string/done"
+            android:background="@drawable/btn_radius_blue_gray"
+            android:textColor="@color/white"
+            android:layout_marginRight="@dimen/size_10"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            />
+    </RelativeLayout>
+    <GridView
+        android:id="@+id/gallery_list"
+        android:layout_below="@id/image_title"
+        android:layout_above="@id/bottom_layout"
+        android:layout_width="match_parent"
+        android:numColumns="4"
+        android:verticalSpacing="@dimen/size_1"
+        android:horizontalSpacing="@dimen/size_1"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

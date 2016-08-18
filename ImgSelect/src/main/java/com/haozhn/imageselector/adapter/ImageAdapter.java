@@ -75,7 +75,7 @@ public class ImageAdapter extends AbsBaseAdapter<Photo> {
             @Override
             public void onClick(View v) {
                 if(viewHolder.tvSelect.isSelected()){
-                    pathList.remove(object.getPath());
+                    pathList.remove(object);
                     viewHolder.tvSelect.setSelected(false);
                 }else{
                     if(pathList!=null&&pathList.size()>=numLimit){

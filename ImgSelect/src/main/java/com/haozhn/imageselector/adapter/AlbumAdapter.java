@@ -7,10 +7,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.haozhn.imageselector.util.ImageLoader;
 import com.haozhn.imageselector.R;
 import com.haozhn.imageselector.model.Album;
 import com.haozhn.imageselector.model.Photo;
+import com.haozhn.imageselector.util.ImageLoader;
 
 import java.util.Locale;
 
@@ -22,11 +22,27 @@ public class AlbumAdapter extends AbsBaseAdapter<Album> {
     public AlbumAdapter(@NonNull Context context) {
         super(context);
     }
+    private boolean showCamera;
+
+    public boolean isShowCamera() {
+        return showCamera;
+    }
+
+    public void setShowCamera(boolean showCamera) {
+        this.showCamera = showCamera;
+    }
+
+    @Override
+    public int getCount() {
+        if (showCamera) {
+            return super.getCount() + 1;
+        }
+        return super.getCount();
+    }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
-        final Album album = getItem(position);
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.adapter_album, parent, false);
             viewHolder = new ViewHolder();
@@ -37,6 +53,20 @@ public class AlbumAdapter extends AbsBaseAdapter<Album> {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+        if (showCamera) {
+            if (position == 0) {
+                viewHolder.tvAlbumName.setText("照相机");
+                viewHolder.photoNum.setText("");
+                viewHolder.ivCover.setImageResource(R.mipmap.ic_take_photo);
+                return convertView;
+            } else {
+                convertView.setClickable(false);
+                --position;
+            }
+        } else {
+            //
+        }
+        final Album album = getItem(position);
         viewHolder.tvAlbumName.setText(album.getName());
         if (album.getPhotoList() != null && album.getPhotoList().size() > 0) {
             Photo p = album.getPhotoList().get(0);

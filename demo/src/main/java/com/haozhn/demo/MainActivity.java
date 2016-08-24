@@ -12,7 +12,7 @@ import com.haozhn.imageselector.util.ImageSelect;
 
 import java.util.ArrayList;
 
-public class MainActivity extends Activity implements AdapterView.OnItemClickListener{
+public class MainActivity extends Activity implements AdapterView.OnItemClickListener {
     private static final int ALBUM = 1;
     private ArrayList<String> pathList = new ArrayList<>();
     private GridView gvPhoto;
@@ -22,11 +22,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        gvPhoto= (GridView) findViewById(R.id.gv_photo);
+        gvPhoto = (GridView) findViewById(R.id.gv_photo);
         gvPhoto.setAdapter(gridAdapter = new PhotoGridAdapter(this));
         gvPhoto.setOnItemClickListener(this);
-        ListView listView;
-        listView.setAdapter();
     }
 
 
@@ -36,21 +34,21 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
             startActivityForResult(new ImageSelect.Builder(this)
                     .setLimit(9)
                     .setMode(ImageSelect.MODE_SELECT)
-                    .Build(),ALBUM);
+                    .build(), ALBUM);
         } else {
             startActivity(new ImageSelect.Builder(this)
                     .setMode(ImageSelect.MODE_PREVIEW)
                     .setPreSource(pathList)
                     .setIndex(position)
-                    .Build());
+                    .build());
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==ALBUM&&resultCode==RESULT_OK){
-            pathList=ImageSelect.getImagePath(data);
+        if (requestCode == ALBUM && resultCode == RESULT_OK) {
+            pathList = ImageSelect.getImagePath(data);
             gridAdapter.setData(pathList);
         }
     }

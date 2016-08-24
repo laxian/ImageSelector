@@ -32,6 +32,8 @@ public class ImageSelect {
         private int index;
         private ArrayList<String> imgs;
         private Activity activity;
+        private boolean bShowCamera;
+
         public Builder(Activity activity){
             this.activity=activity;
         }
@@ -45,6 +47,11 @@ public class ImageSelect {
             return this;
         }
 
+        public Builder setShowCamera(boolean bval){
+            this.bShowCamera = bval;
+            return this;
+        }
+
         public Builder setPreSource(ArrayList<String> list){
             imgs=list;
             return this;
@@ -55,12 +62,13 @@ public class ImageSelect {
             return this;
         }
 
-        public Intent Build(){
+        public Intent build(){
             Intent intent=new Intent();
             switch (mode){
                 case MODE_SELECT:
                     intent.setClass(activity,AlbumActivity.class);
                     intent.putExtra(KeyConstant.LIMIT,limit);
+                    intent.putExtra(KeyConstant.SHOWCAMERA,bShowCamera);
                     break;
                 case MODE_PREVIEW:
                     intent.setClass(activity,BigImageActivity.class);

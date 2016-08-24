@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.haozhn.imageselector.adapter.BigImageAdapter;
@@ -26,6 +28,8 @@ public class BigImageActivity extends BaseActivity{
     private int index;
     @Override
     protected void getBundle(Bundle bundle) {
+        //隐藏状态栏
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.getBundle(bundle);
         images=bundle.getStringArrayList(KeyConstant.ALLPHOTO);
         index=bundle.getInt(KeyConstant.INDEX,0);
@@ -34,7 +38,7 @@ public class BigImageActivity extends BaseActivity{
     @Override
     protected void setUpView(View view) {
         $(R.id.left_icon).setVisibility(View.GONE);
-        $(R.id.title_bg).setBackgroundColor(ContextCompat.getColor(this,R.color.black));
+        $(R.id.title_bg).setBackgroundColor(ContextCompat.getColor(this,R.color.transparent));
         $(R.id.div).setVisibility(View.GONE);
         title = $(R.id.title);
         viewpager = $(R.id.viewpager);

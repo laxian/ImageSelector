@@ -10,5 +10,7 @@
     <color name="blue">#FF6F9CE9</color>
     <color name="dialog_backgroud">#99000000</color>
     <color name="gray2">#9B9B9B</color>
+    <color name="gray3">#F0F0F0</color>
     <color name="transparent">#00000000</color>
+    <color name="transparent2">#669B9B9B</color>
 </resources>

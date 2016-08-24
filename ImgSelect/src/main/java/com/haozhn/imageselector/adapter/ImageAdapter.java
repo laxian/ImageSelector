@@ -2,6 +2,7 @@ package com.haozhn.imageselector.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -21,8 +22,10 @@ public class ImageAdapter extends AbsBaseAdapter<Photo> {
     private ArrayList<Photo> pathList;
     private int numLimit;
     private OnCountChangeListener listener;
-    public ImageAdapter(@NonNull Context context) {
+    private boolean mIsCropSquare;
+    public ImageAdapter(@NonNull Context context,boolean isCropSquare) {
         super(context);
+        this.mIsCropSquare = isCropSquare;
         pathList = new ArrayList<>();
     }
 
@@ -56,6 +59,10 @@ public class ImageAdapter extends AbsBaseAdapter<Photo> {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+        Log.i("xxx", "getView: "+mIsCropSquare);
+        if(mIsCropSquare){
+            viewHolder.tvSelect.setVisibility(View.GONE);
+        }
         ImageLoader.loadPhoto(context,object.getPath(),viewHolder.image);
         if (pathList != null) {
             boolean in=false;
@@ -88,7 +95,7 @@ public class ImageAdapter extends AbsBaseAdapter<Photo> {
                         viewHolder.tvSelect.setSelected(true);
                     }
                 }
-                listener.OnCountChange(pathList.size());
+                listener.onCountChange(pathList.size());
             }
         });
         return convertView;
@@ -100,6 +107,6 @@ public class ImageAdapter extends AbsBaseAdapter<Photo> {
     }
 
     public interface OnCountChangeListener{
-        void OnCountChange(int count);
+        void onCountChange(int count);
     }
 }

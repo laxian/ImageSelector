@@ -30,6 +30,7 @@ public class ImageActivity extends BaseActivity implements View.OnClickListener,
     private int limit;
     private ArrayList<Photo> selectPhotos;
     private Album album;
+    private boolean mIsCropSquare;
 
     private ImageAdapter adapter;
     @Override
@@ -40,6 +41,8 @@ public class ImageActivity extends BaseActivity implements View.OnClickListener,
         album = (Album) bundle.getSerializable(KeyConstant.ALBUM);
         if(album==null) album=new Album();
         if(selectPhotos==null) selectPhotos=new ArrayList<>();
+
+        mIsCropSquare = getIntent().getBooleanExtra(KeyConstant.CROP_SQUARE,false);
     }
 
     @Override
@@ -51,6 +54,12 @@ public class ImageActivity extends BaseActivity implements View.OnClickListener,
         galleryList=$(R.id.gallery_list);
         right=$(R.id.right);
 
+        if(mIsCropSquare){
+            //如果是剪切图片,则不预览和确定,直接点击进入看大图
+            tvPreview.setVisibility(View.GONE);
+            tvDone.setVisibility(View.GONE);
+        }
+
         right.setText(R.string.cancel);
         right.setOnClickListener(this);
         leftIcon.setOnClickListener(this);
@@ -58,7 +67,7 @@ public class ImageActivity extends BaseActivity implements View.OnClickListener,
         tvPreview.setOnClickListener(this);
         title.setText(album.getName());
         changeTvByCount(selectPhotos.size());
-        galleryList.setAdapter(adapter=new ImageAdapter(this));
+        galleryList.setAdapter(adapter=new ImageAdapter(this,mIsCropSquare));
         galleryList.setOnItemClickListener(this);
         adapter.setNumLimit(limit);
         adapter.setPathList(selectPhotos);
@@ -86,6 +95,7 @@ public class ImageActivity extends BaseActivity implements View.OnClickListener,
                 showToast(R.string.you_not_select_image);
                 return;
             }
+
             Intent intent=new Intent(this,PreviewActivity.class);
             intent.putExtra(KeyConstant.ALLPHOTO,selectPhotos);
             intent.putExtra(KeyConstant.INDEX,0);
@@ -108,7 +118,7 @@ public class ImageActivity extends BaseActivity implements View.OnClickListener,
     }
 
     @Override
-    public void OnCountChange(int count) {
+    public void onCountChange(int count) {
         changeTvByCount(count);
     }
 
@@ -128,6 +138,14 @@ public class ImageActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if(mIsCropSquare){
+            Intent cropIntent = new Intent(this,SquareCropActivity.class);
+            cropIntent.putExtra(KeyConstant.IMAGE_PATH,album.getPhotoList().get(position).getPath());
+            cropIntent.putExtra(KeyConstant.CROP_WIDTH,getIntent().getIntExtra(KeyConstant.CROP_WIDTH,200));
+            cropIntent.putExtra(KeyConstant.CROP_HEIGHT,getIntent().getIntExtra(KeyConstant.CROP_HEIGHT,200));
+            startActivityForResult(cropIntent,KeyConstant.CROP_REQUEST_CODE);
+            return;
+        }
         Intent intent=new Intent(this,PreviewActivity.class);
         intent.putExtra(KeyConstant.ALLPHOTO,album.getPhotoList());
         intent.putExtra(KeyConstant.INDEX,position);
@@ -147,6 +165,14 @@ public class ImageActivity extends BaseActivity implements View.OnClickListener,
             if(done){
                 back(true);
             }
+        }
+
+        if(requestCode == KeyConstant.CROP_REQUEST_CODE && resultCode == RESULT_OK && mIsCropSquare){
+            Intent intent = new Intent();
+            String  savePath=data.getStringExtra(KeyConstant.CROP_SAVE_PATH);
+            intent.putExtra(KeyConstant.CROP_SAVE_PATH,savePath);
+            setResult(RESULT_OK, intent);
+            finish();
         }
     }
 }

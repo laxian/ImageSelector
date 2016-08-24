@@ -1,37 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     android:id="@+id/p_layout"
-    android:background="@color/black"
-    android:layout_height="match_parent">
-    <include android:id="@+id/title_bg" layout="@layout/title"/>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <include
+        android:id="@+id/title_bg"
+        layout="@layout/title" />
+
     <RelativeLayout
         android:id="@+id/bottom_layout"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:background="@color/black"
-        android:layout_height="@dimen/size_50">
+        android:layout_height="@dimen/size_50"
+        android:layout_alignParentBottom="true"
+        android:background="@color/black">
+
         <TextView
             android:id="@+id/tv_done"
-            android:textSize="@dimen/small_size"
-            android:gravity="center"
             android:layout_width="@dimen/size_65"
             android:layout_height="@dimen/size_30"
-            android:text="@string/done"
-            android:background="@drawable/btn_radius_blue_gray"
-            android:textColor="@color/white"
-            android:layout_marginRight="@dimen/size_10"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            />
+            android:layout_marginRight="@dimen/size_10"
+            android:background="@drawable/btn_radius_blue_gray"
+            android:gravity="center"
+            android:text="@string/done"
+            android:textColor="@color/white"
+            android:textSize="@dimen/small_size" />
     </RelativeLayout>
-    <android.support.v4.view.ViewPager
+
+    <com.haozhn.imageselector.widget.ZoomViewPager
         android:id="@+id/viewpager"
-        android:layout_below="@id/title_bg"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_above="@id/bottom_layout"
-        android:layout_centerInParent="true"
-        android:layout_height="match_parent">
-    </android.support.v4.view.ViewPager>
+        android:layout_below="@id/title_bg"
+        android:layout_centerInParent="true"></com.haozhn.imageselector.widget.ZoomViewPager>
 
 </RelativeLayout>
